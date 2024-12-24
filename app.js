@@ -1,21 +1,28 @@
+// console.log('first');
+// setTimeout(()=>{
+//     console.log('second');
+    
+// },0)
+// console.log('third');
+
 const http = require('http')
 
 const server = http.createServer((req,res)=>{
-    // console.log(req);
     if(req.url === '/'){
-        res.end('welcome');
+        res.end('home page')
     }
-     if(req.url === '/about'){
-        res.end('welcome about');
-     }
-    // res.write('welocome to our home page')
-    // res.end()
-    res.end(`
-        <h1>OOPS!</h1>
-        <p>page found</p>
-        <a href='/'>back </a>
-
-       `)
+    if(req.url === '/about'){
+///BLOCKING CODE!!!!!
+        for(let i =0 ; i<1000; i++){
+            for(let j=0 ; j<1000; j++){
+                console.log(`${i} ${j}`);
+                
+            }
+        }
+        res.end('About Page')
+    }
+    res.end('Error page')
 })
-server.listen(5000)
-
+    server.listen(5000, ()=>{
+        console.log('Server Listening on port 5000..');
+})
